@@ -47,9 +47,9 @@ def bayes_infer(
     total error with different numbers of ensemble models used.
     """
 
-    function_args = {k: v for k, v in locals().items() if k != 'self'}
     if scratch_dir is None:
         scratch_dir = os.path.join(save_dir, "scratch")
+    function_args = {k: v for k, v in locals().items() if k != 'self'}
     os.makedirs(save_dir, exist_ok=True)
     os.makedirs(scratch_dir, exist_ok=True)
 
@@ -65,8 +65,8 @@ def bayes_infer(
     )
 
     integration_func = {
-        "simps": integrate.simps,
-        "trapz": integrate.trapz,
+        "simps": integrate.simpson,
+        "trapz": integrate.trapezoid,
     }[integration_method]
     inference_func = {
         "combined": combined_prior,
